@@ -1,20 +1,16 @@
 {
-  "name": "electron-quick-start",
+  "name": "bitinvo-update-server",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "An update application",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "",
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "Electron"
   ],
-  "author": "GitHub",
+  "author": "NaseTech",
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^1.4.1"

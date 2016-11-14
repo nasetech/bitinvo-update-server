@@ -5,12 +5,11 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 'use strict'
-const path = require('path'),
-      fs = require('fs'),
+const fs = require('fs'),
       _ = require('underscore');
 module.exports = {
   latest : (req, res) => {
-    let updatePath = path.resolve(__dirname, '../../../..') + '/update'
+    let updatePath = sails.config.server.updatePath;
     fs.readdir(updatePath, (err, files) => {
       if(err){
         return sails.log.error(err);
