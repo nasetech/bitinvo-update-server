@@ -14,5 +14,10 @@
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^1.4.1"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "jade": "^1.11.0",
+    "underscore": "^1.8.3"
   }
 }
