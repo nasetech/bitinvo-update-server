@@ -33,9 +33,9 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': {
-    view: 'homepage'
+    view: 'index'
   },
-  'get /latest' : 'UpdateController.latest',
+  'get /update' : 'UpdateController.latest',
   'get /download' : 'DownloadController.download'
   /***************************************************************************
   *                                                                          *
