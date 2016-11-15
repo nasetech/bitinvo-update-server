@@ -35,15 +35,15 @@ let fileStatus = (msg) => {
 
 let networkStatus = (msg) => {
   return new Promise((resolve, reject) => {
-    var interfaces = require('os').networkInterfaces();  
-    for(var devName in interfaces){  
-          var iface = interfaces[devName];  
-          for(var i = 0; i < iface.length; i ++){  
-               var alias = iface[i];  
+    let interfaces = require('os').networkInterfaces();  
+    for(let devName in interfaces){  
+          let iface = interfaces[devName];  
+          for(let i = 0; i < iface.length; i ++){  
+               let alias = iface[i];  
                if(alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal){
-                      msg.networkStatus =  alias.address + ':1337/update';
-                     return resolve(msg);  
-               }  
+                 msg.networkStatus = 'http://' + alias.address + ':' + PORT + '/update';
+                 return resolve(msg);
+                }  
           }
       }
     msg.networkStatus = '无网络连接，柜机无法访问本机升级' 
