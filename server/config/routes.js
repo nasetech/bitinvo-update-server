@@ -32,9 +32,7 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': {
-    view: 'index'
-  },
+  '/': 'StatusController.index',
   'get /update' : 'UpdateController.latest',
   'get /download' : 'DownloadController.download'
   /***************************************************************************
