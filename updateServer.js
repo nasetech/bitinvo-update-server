@@ -7,7 +7,7 @@ const Promise = require('bluebird');
 const _ = require('underscore');
 const indexPath = require.resolve('./index.jade');
 const indexFn = require('jade').compileFile(indexPath);
-const PORT = 1337;
+const PORT = 3000;
 const updatePath = path.resolve(__dirname, '..') + '/update'
 
 let fileStatus = (msg) => {
@@ -94,20 +94,13 @@ let download = (req, res) => {
       res.write("File Not found: 404 Not Found\n");
       return res.end();
     }
-    fs.readFile(filepath, "binary", (err, file) => {
-      if(err){
-        res.writeHead(500, {"Content-Type": 'text/plain;charset=UTF-8'});
-        res.write(err + "\n");
-        return res.end();
-      }
-      res.writeHead(200, {
-        "Content-Disposition": "attachment;filename=" + filename,
-        'Content-Type': 'application/octet-stream',
-        'Content-Length': file.length
-      });
-      res.write(file);
-      res.end();
-    })
+    let stat = fs.statSync(filepath);
+    res.writeHead(200, {
+      "Content-Disposition": "attachment;filename=" + filename,
+      'Content-Type': 'application/octet-stream',
+      'Content-Length': stat.size
+    });
+    fs.createReadStream(filepath).pipe(res);
   })
 }
 
