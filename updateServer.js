@@ -4,6 +4,7 @@ const url = require('url');
 const fs = require('fs');
 const path = require('path');
 const Promise = require('bluebird');
+const crypto = require('crypto');
 const _ = require('underscore');
 const indexPath = require.resolve('./index.jade');
 const indexFn = require('jade').compileFile(indexPath);
@@ -75,8 +76,17 @@ let latest = (req, res) => {
       let fullpath = [updatePath, file].join('/');
       return fs.statSync(fullpath).mtime;
     })
-    res.writeHeader(200,{'Content-Type':'text/plain;charset=UTF-8'});
-    return res.end(latestFile)
+    // calc MD5
+    let rs = fs.createReadStream([updatePath, latestFile].join('/'));
+    let hash = crypto.createHash('md5');
+    rs.on('data', hash.update.bind(hash));
+    rs.on('end', function () {
+      let value = hash.digest('hex');
+      res.writeHeader(200,{'Content-Type':'text/plain;charset=UTF-8'});
+      let response = [latestFile, value].toString();
+      return res.end(response)
+    });
+
   })
 }
 
